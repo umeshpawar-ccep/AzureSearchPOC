@@ -52,7 +52,7 @@
       },
       "kind": "Storage",
       "name": "[concat(parameters('storageAccounts_searchblobs_name'), uniqueString(resourceGroup().id))]",
-      "apiVersion": "2018-05-01",
+      "apiVersion": "2019-06-01",
       "location": "West Europe",
       "tags": { },
       "properties": { },
