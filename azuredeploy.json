@@ -26,6 +26,23 @@
       "name": "[parameters('rgName')]",
       "properties": {}
     },
+   {
+      "comments": "",
+      "type": "Microsoft.Search/searchServices",
+      "sku": {
+        "name": "basic"
+      },
+      "name": "[concat(parameters('searchService_name'), uniqueString(resourceGroup().id))]",
+      "apiVersion": "2015-08-19",
+      "location": "West Europe",
+      "properties": {
+        "replicaCount": 1,
+        "partitionCount": 1,
+        "hostingMode": "default"
+      },
+      "resources": [ ],
+      "dependsOn": [ ]
+    },
     {
       "comments": "",
       "type": "Microsoft.Storage/storageAccounts",
