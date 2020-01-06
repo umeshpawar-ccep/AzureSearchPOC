@@ -1,0 +1,63 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+	"rgName": {
+        "type": "string"
+    },
+    "rgLocation": {
+        "type": "string"
+    },
+    "searchService_name": {
+      "defaultValue": "srch",
+      "type": "string"
+    },
+    "storageAccounts_searchblobs_name": {
+      "defaultValue": "blobs",
+      "type": "string"
+    }
+  },
+  "variables": { },
+  "resources": [
+    {
+      "type": "Microsoft.Resources/resourceGroups",
+      "apiVersion": "2018-05-01",
+      "location": "[parameters('rgLocation')]",
+      "name": "[parameters('rgName')]",
+      "properties": {}
+    },
+	{
+      "comments": "",
+      "type": "Microsoft.Search/searchServices",
+      "sku": {
+        "name": "basic"
+      },
+      "name": "[concat(parameters('searchService_name'), uniqueString(resourceGroup().id))]",
+      "apiVersion": "2018-05-01",
+      "location": "West Europe",
+      "properties": {
+        "replicaCount": 1,
+        "partitionCount": 1,
+        "hostingMode": "default"
+      },
+      "resources": [ ],
+      "dependsOn": [ ]
+    },
+    {
+      "comments": "",
+      "type": "Microsoft.Storage/storageAccounts",
+      "sku": {
+        "name": "Standard_LRS",
+        "tier": "Standard"
+      },
+      "kind": "Storage",
+      "name": "[concat(parameters('storageAccounts_searchblobs_name'), uniqueString(resourceGroup().id))]",
+      "apiVersion": "2018-05-01",
+      "location": "West Europe",
+      "tags": { },
+      "properties": { },
+      "resources": [ ],
+      "dependsOn": [ ]
+    }
+]
+}
